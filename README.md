@@ -3,8 +3,8 @@
 Simple API to manage phonenumbers and phonecalls
 
 ## Requisitos
-Python 2.7
-Pip
+* Python 2.7
+* Pip
 
 ## Instalación de dependencias
 
@@ -66,7 +66,7 @@ curl -i 'http://127.0.0.1:5000/lines/:phone_number'
 Esta api devolverá 404 en caso de no encontrar el número ingresado (no chequea si el número está bien escrito ya que tenga letras o símbolos raros igualmente le llegaría 404 NOT FOUND.
 En caso de encontrarlo, devuelve 200 y el resultado.
 
-Este enpoint, a su vez, tambi´én permite eliminar un n´úmero de telefono en particular, ejecutando:
+Este enpoint, a su vez, también permite eliminar un número de telefono en particular, ejecutando:
 
 ```bash
 curl -X "DELETE" 'http://127.0.0.1:5000/lines/:phone_number'
