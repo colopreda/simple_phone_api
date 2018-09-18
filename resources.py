@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import request
 from flask_restful import Resource
 from flask_restful import abort
@@ -18,7 +19,7 @@ class LineResourceCreation(Resource):
         data, errors = phone_schema.load(json_data)
         if errors:
             return errors, 422
-        # Check if the keys entered are the ones expected            
+        # Check if the keys entered are the ones expected        
         try:
             phone = Phone(phone_number=data['phone_number'], name=data['name'])
         except KeyError:
