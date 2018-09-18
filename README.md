@@ -58,6 +58,26 @@ Si el phone_number no es válido (tiene letras), si no envío data en el body o 
 En caso de que se envíe un tipo de dato incorrecto al requerido, la api nos informará que key tiene un tipo inválido y devolverá  422.
 Si todo sale bien, devolverá 200 y la nueva columna creada en la base de datos.
 
+```bash
+curl -i --header 'Content-Type: application/json' \
+     --request POST \
+     --data '{"phone_number": 123456 , "name":"hola"}' \
+     http://127.0.0.1:5000/lines/create
+```
+```javascript
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 71
+Server: Werkzeug/0.14.1 Python/2.7.15
+Date: Tue, 18 Sep 2018 20:04:18 GMT
+
+{
+    "minutes": 0, 
+    "name": "hola", 
+    "phone_number": 123456
+}
+```
+
 2. Consulta de la información de un número de telefono en particular `/lines/:phonenumber`
 
 ```bash
@@ -95,8 +115,8 @@ Date: Tue, 18 Sep 2018 18:11:56 GMT
 3. Realizar una llamada de X minutos en una línea en particular `/lines/:phonenumber/phonecall`
 
 ```bash
-curl -H 'Content-Type: application/json' -X -i PUT \
-     -d '{"minutes": 2}' \
+curl -i -H 'Content-Type: application/json' \
+     -X PUT -d '{"minutes": 2}' \
      'http://127.0.0.1:5000/lines/:phone_number/phonecall'
 ```
 Si el phone_number no es válido (tiene letras), si no envío data en el body, si las keys enviadas en data son erroneas, si la cantidad de minutos que se le pasaron por body es negativa o si la cantidad de minutos enviada no permite realizar la llamada (minutos restantes - minutos disponibles < 0) devuelvo 400.
@@ -106,9 +126,7 @@ Si todo sale bien, devolverá 200 y la información actualizada de la línea.
 
 Por ejemplo:
 ```bash
-curl -H 'Content-Type: application/json' -X -i PUT \
-     -d '{"minutes": 2}' \
-     'http://127.0.0.1:5000/lines/:phone_number/phonecall'
+curl -i 'http://127.0.0.1:5000/lines/1157639285'
 ```
 ```javascript
 HTTP/1.0 200 OK
@@ -124,8 +142,8 @@ Date: Tue, 18 Sep 2018 18:11:56 GMT
 }
 ```
 ```bash
-curl -H 'Content-Type: application/json' -X -i PUT \
-     -d '{"minutes": 2}' \
+curl -i -H 'Content-Type: application/json' \
+     -X PUT -d '{"minutes": 2}' \
      'http://127.0.0.1:5000/lines/1157639285/phonecall'
 ```
 ```javascript
@@ -145,8 +163,8 @@ Date: Tue, 18 Sep 2018 18:24:42 GMT
 4. Realizar una recarga y que el restante sea X en una línea en particular `/lines/:phonenumber/charge`
 
 ```bash
-curl -H 'Content-Type: application/json' -X -i PUT \
-     -d '{"minutes": 2}' \
+curl -i -H 'Content-Type: application/json' \
+     -X PUT -d '{"minutes": 2}' \
      'http://127.0.0.1:5000/lines/:phone_number/charge'
 ```
 Si el phone_number no es válido (tiene letras), si no envío data en el body, si las keys enviadas en data son erroneas o si la cantidad de minutos que se le pasaron por body es negativa, devuelvo 400.
@@ -172,17 +190,11 @@ Date: Tue, 18 Sep 2018 18:11:56 GMT
 }
 ```
 ```bash
-curl -H 'Content-Type: application/json' \
+curl -i -H 'Content-Type: application/json' \
      -X PUT -d '{"minutes": 12}' \
-     'http://127.0.0.1:5000/lines/1157639285/charge' -i
+     'http://127.0.0.1:5000/lines/1157639285/charge'
 ```
 ```javascript
-HTTP/1.0 200 OK
-Content-Type: application/json
-Content-Length: 75
-Server: Werkzeug/0.14.1 Python/2.7.15
-Date: Tue, 18 Sep 2018 18:24:42 GMT
-
 HTTP/1.0 200 OK
 Content-Type: application/json
 Content-Length: 76
