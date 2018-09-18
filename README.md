@@ -1,6 +1,6 @@
 # Simple Phone API
 
-Simple API to manage phonenumbers and phonecalls
+Ejemplo de una API para manejar números de telefono con posibilidad de cargarle minutos y realizar llamadas.
 
 ## Requisitos
 * Python 2.7
@@ -200,9 +200,17 @@ Date: Tue, 18 Sep 2018 18:32:11 GMT
 
 * Seguí la convención que maneja la librería, de tener en un archivo el modelo, en otro la configuración de la base de datos, en un tercero el comportamiento de las api calls y en un archivo principal (app.py), la parte de lanzar la aplicación y el routeo de las diferentes rutas
 
+* Todos los tests que se hicieron son unitarios, utilizando una base de datos que en cada test se elimina y crea de nuevo con los datos de prueba para testear. El archivo resources.py cuenta con un 100% de coverage (el archivo más importante), lo que significa que todos los flujos posibles fueron testeados.
+
+* Se consideró (por lo que se entiende del enunciado), que cuando a un telefono le realizamos una recarga, la cantidad de minutos que se le pasan por el body es la cantidad total de minutos que le van a quedar a ese número, aunque este caso parezca estar muy alejado de la realidad, ya que uno cuando realiza una recarga, el saldo que uno carga, se le suele agregar al que ya tenía disponible.
+
 ## Cambios 
 
+* Separar el código en más carpetas y/o clases. Por cuestiones de tiempo y que python no siempre es tan amigable cuando las cosas no están en las mismas carpetas, quedaron todos los archivos en el root. A futuro, se podría cambiar para mejorar la legibilidad
 
-## To Do
+* Agregar más comentarios, aunque la sintaxis de python es muy amigable y todas las operaciones suelen entenderse con facilidad, ayudaría a entender ciertas partes del código.
 
+## Cambios que se podrían agregar
+
+* En Python, una vez que tenes armado el modelo, y una base de los resources, es muy fácil agregar nuevas funcionalidades, debido a la simplicidad de Python. Entre algunas de las cosas que me hubiera gustado agregar, sería la posibilidad de que te genere un número de telefono aleatorio, pasandole la longitud del número y un código de área (asi se asemeja más a la realidad). También, se podrían agregar cosas como manejo de segundos, que si la duración de la llamada es menor a 30 segundos, te cobre 30 segundos, etc.
 
